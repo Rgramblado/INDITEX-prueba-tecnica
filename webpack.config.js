@@ -15,6 +15,7 @@ module.exports = (env) => {
       filename: isProduction ? '[name].[contenthash].js' : '[name].js',
       chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].chunk.js',
       clean: true,
+      publicPath: '/',
     },
     optimization: {
       minimize: isProduction,
@@ -86,6 +87,7 @@ module.exports = (env) => {
       compress: true,
       port: 3000,
       hot: true,
+      historyApiFallback: true,
     },
   };
 };
