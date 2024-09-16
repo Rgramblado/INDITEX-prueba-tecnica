@@ -4,19 +4,26 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// Components
-import App from "./App";
-
 // Contexts
 import { AppContextProvider } from "./contexts/app.context";
 
-console.log("Modo:", process.env.NODE_ENV);
-console.log("¿Es producción?", process.env.IS_PRODUCTION);
+// Views
+import MainView from "./views/main/Main.view";
+import PodcastView from "./views/podcast/Podcast.view";
+import EpisodeView from "./views/episode/Episode.view";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: <MainView />,
+    },
+    {
+        path: "/podcast/:id",
+        element: <PodcastView />,
+    },
+    {
+        path: "/podcast/:id/episode/:episodeId",
+        element: <EpisodeView />,
     },
 ]);
 
