@@ -2,7 +2,7 @@ import { formatDate, formatMsToHHMMSS } from "../date.utils";
 
 describe("Utils - Date - Date Utils", () => {
   it("should format date correctly", () => {
-    const date = new Date("2024-06-10T10:00:00");
+    const date = "2024-06-10T10:00:00";
     expect(formatDate(date)).toBe("10/06/2024");
   });
 
@@ -11,6 +11,6 @@ describe("Utils - Date - Date Utils", () => {
   });
 
   it("should handle zero hours correctly", () => {
-    expect(formatMsToHHMMSS(59000)).toBe("0:59");
+    expect(formatMsToHHMMSS(59000)).toBe("00:59");
   });
 });

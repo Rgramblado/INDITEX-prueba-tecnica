@@ -12,19 +12,31 @@ import MainView from "./views/main/Main.view";
 import PodcastView from "./views/podcast/Podcast.view";
 import EpisodeView from "./views/episode/Episode.view";
 
+// Components
+import LayoutComponent from "./components/layout/Layout.component";
+
+// Styles
+import "./index.css";
+
 const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <LayoutComponent />,
+    children: [
+      {
         path: "/",
         element: <MainView />,
-    },
-    {
-        path: "/podcast/:id",
+      },
+      {
+        path: "/podcast/:podcastId",
         element: <PodcastView />,
-    },
-    {
-        path: "/podcast/:id/episode/:episodeId",
+      },
+      {
+        path: "/podcast/:podcastId/episode/:episodeId",
         element: <EpisodeView />,
-    },
+      },
+    ],
+  },
 ]);
 
 createRoot(document.getElementById("root") as HTMLElement).render(

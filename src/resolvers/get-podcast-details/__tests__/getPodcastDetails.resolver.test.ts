@@ -21,7 +21,7 @@ describe('Resolvers - Get Podcast Details - getPodcastDetails resolver', () => {
 
   it('should return cached data if available', async () => {
     const podcastId = '1535809341';
-    const cachedData = { ...getPodcastDetailMock.results[0], episodes: [] };
+    const cachedData = { ...JSON.parse(getPodcastDetailMock.contents).results[0], episodes: [] };
     (getFromLocalStorage as jest.Mock).mockReturnValue(cachedData);
 
     const result = await getPodcastDetailsResolver(podcastId);
@@ -33,7 +33,7 @@ describe('Resolvers - Get Podcast Details - getPodcastDetails resolver', () => {
 
   it('should fetch and cache data if not in cache', async () => {
     const podcastId = '1535809341';
-    const serviceData = { ...getPodcastDetailMock.results[0], episodes: [] };
+    const serviceData = { ...JSON.parse(getPodcastDetailMock.contents).results[0], episodes: [] };
     (getFromLocalStorage as jest.Mock).mockReturnValue(null);
     (getPodcastDetails as jest.Mock).mockResolvedValue(serviceData);
 

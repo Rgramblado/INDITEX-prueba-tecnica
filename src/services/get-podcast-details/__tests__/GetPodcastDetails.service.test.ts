@@ -25,20 +25,19 @@ describe('Services - Get Podcast Details - GetPodcastDetails service', () => {
     const result = await getPodcastDetails({ podcastId });
 
     expect(global.fetch).toHaveBeenCalledWith(
-      `https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`
+      `https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`)}`
     );
-    expect(result).toEqual(mapApiResponseToPodcast(getPodcastDetailMock));
+    expect(result).toEqual(await mapApiResponseToPodcast(JSON.parse(getPodcastDetailMock.contents)));
   });
 
   it('should handle errors and return null', async () => {
-    // Configurar el mock de fetch para el caso negativo
     (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Error de red'));
 
     const podcastId = '1535809341';
     const result = await getPodcastDetails({ podcastId });
 
     expect(global.fetch).toHaveBeenCalledWith(
-      `https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`
+      `https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`)}`
     );
     expect(result).toBeNull();
   });

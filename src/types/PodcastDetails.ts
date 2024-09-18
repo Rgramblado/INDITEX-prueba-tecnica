@@ -3,7 +3,7 @@ export interface PodcastEpisode {
   title: string;
   description: string;
   shortDescription: string;
-  releaseDate: Date;
+  releaseDate: string;
   durationInMilliseconds: number;
   audioUrl: string;
   imageUrl: string;
@@ -15,6 +15,7 @@ export interface PodcastDetails {
   name: string;
   description: string;
   imageUrl: string;
+  artistName: string;
   episodes: PodcastEpisode[];
 }
 

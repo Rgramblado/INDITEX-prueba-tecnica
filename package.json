@@ -8,6 +8,7 @@
     "build": "webpack --mode production --env production",
     "build:dev": "webpack --mode development --env development",
     "test": "jest --coverage",
+    "test:watch": "jest --watchAll --coverage",
     "tsc": "tsc"
   },
   "keywords": [],
