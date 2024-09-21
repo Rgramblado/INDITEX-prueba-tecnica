@@ -25,9 +25,10 @@ const EpisodeView = (): React.ReactElement => {
           <EpisodeTitle data-testid="episode-title">
             {episode?.title}
           </EpisodeTitle>
-          <EpisodeDescription data-testid="episode-description">
-            {episode?.description}
-          </EpisodeDescription>
+          <EpisodeDescription
+            data-testid="episode-description"
+            dangerouslySetInnerHTML={{ __html: episode?.description ?? "" }}
+          />
           <EpisodeAudio data-testid="episode-audio" controls>
             <source src={episode?.audioUrl} />
             Your browser does not support the audio element.
