@@ -1,5 +1,8 @@
 import subprocess
 
+def get_current_branch():
+    return subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode().strip()
+
 def get_latest_tag():
     try:
         return subprocess.check_output(['git', 'describe', '--tags', '--abbrev=0']).decode().strip()
@@ -23,6 +26,12 @@ def create_tag(tag_name):
     subprocess.run(['git', 'push', 'origin', tag_name])
 
 def main():
+    current_branch = get_current_branch()
+    
+    if current_branch != 'main':
+        print("No se requiere un nuevo tag en esta rama.")
+        return
+
     commit_msg = get_last_commit_message()
     increment_type = commit_msg.split()[0].upper()
 
