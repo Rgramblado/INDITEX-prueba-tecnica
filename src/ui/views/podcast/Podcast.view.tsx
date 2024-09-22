@@ -1,12 +1,16 @@
 // Vendors
-import React from "react";
+import React, { useEffect } from "react";
+
+// Redux
+import { fetchPodcast } from "@/store/slices/podcastSlice";
+import { RootState } from "@/store/store";
+import { useAppDispatch } from "@/store/hooks";
+import { IPodcast } from "@/domain/entities/Podcast";
 
 // Components
 import PodcastDetailsCardComponent from "../../components/podcast-details-card/PodcastDetailsCard.component";
-import AsyncLayout from "@/components/async-layout/AsyncLayout.component";
+import AsyncLayout from "@/ui/components/async-layout/AsyncLayout.component";
 
-// Hooks
-import usePodcast from "./hooks/Podcast.hook";
 
 // Styles
 import {
@@ -20,12 +24,23 @@ import {
 
 // Utils
 import { formatDate, formatMsToHHMMSS } from "@/utils/date/date.utils";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const PodcastView = (): React.ReactElement => {
-  const { podcast } = usePodcast();
+  const { podcastId } = useParams();
+  const dispatch = useAppDispatch();
+  const podcast: IPodcast | null = useSelector(
+    (state: RootState) => podcastId ? state.podcast?.[podcastId]?.data ?? null : null
+  );
+
+  useEffect(() => {
+    podcastId && dispatch(fetchPodcast(podcastId));
+  }, [dispatch, podcastId]);
+
 
   return (
-    <AsyncLayout>
+    <AsyncLayout loading={!podcast}>
       <PodcastContainer data-testid="podcast-container">
         <PodcastDetailsCardComponent podcastDetails={podcast} />
       <PodcastDetailsContainer>
@@ -54,7 +69,7 @@ const PodcastView = (): React.ReactElement => {
                     </PodcastStyledLink>
                   </td>
                   <td>{formatDate(episode.releaseDate)}</td>
-                  <td>{formatMsToHHMMSS(episode.durationInMilliseconds)}</td>
+                  <td>{formatMsToHHMMSS(episode.duration)}</td>
                 </tr>
               ))}
             </tbody>

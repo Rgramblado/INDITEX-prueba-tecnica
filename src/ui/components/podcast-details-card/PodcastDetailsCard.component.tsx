@@ -15,12 +15,12 @@ import {
 } from "./PodcastDetailsCard.styles";
 
 // Types
-import { PodcastDetails } from "@/types/PodcastDetails";
+import { IPodcast } from "@/domain/entities/Podcast";
 
 const PodcastDetailsCardComponent = ({
   podcastDetails,
 }: {
-  podcastDetails: PodcastDetails | null;
+  podcastDetails: IPodcast | null;
 }): React.ReactElement => {
 
   if (!podcastDetails) return <></>;
@@ -30,16 +30,16 @@ const PodcastDetailsCardComponent = ({
       <StyledLink to={`/podcast/${podcastDetails.id}`}>
         <PodcastDetailsCardImage
           src={podcastDetails.imageUrl}
-          alt={podcastDetails.name}
+          alt={podcastDetails.title}
         />
       </StyledLink>
       <PodcastDetailsCardTitleContainer>
         <StyledLink to={`/podcast/${podcastDetails.id}`}>
-          <PodcastDetailsCardTitle>{podcastDetails.name}</PodcastDetailsCardTitle>
+          <PodcastDetailsCardTitle>{podcastDetails.title}</PodcastDetailsCardTitle>
         </StyledLink>
         <StyledLink to={`/podcast/${podcastDetails.id}`}>
           <PodcastDetailsCardArtist>
-            by: {podcastDetails.artistName}
+            by: {podcastDetails.artist}
           </PodcastDetailsCardArtist>
         </StyledLink>
       </PodcastDetailsCardTitleContainer>
@@ -48,7 +48,7 @@ const PodcastDetailsCardComponent = ({
           Description:
         </PodcastDetailsCardDescriptionTitle>
         <PodcastDetailsCardDescription>
-          {podcastDetails.description}
+          {podcastDetails.summary}
         </PodcastDetailsCardDescription>
       </PodcastDetailsCardDescriptionContainer>
     </PodcastDetailsCardContainer>

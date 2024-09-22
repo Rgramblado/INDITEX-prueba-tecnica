@@ -11,19 +11,18 @@ import {
 } from "./PodcastCard.styles";
 
 // Types
-import { Podcast } from "@/types/Podcast.type";
+import { IPodcastSummary } from "@/domain/entities/PodcastSummary";
 
 const PodcastCardComponent = ({
   podcast,
 }: {
-  podcast: Podcast;
+  podcast: IPodcastSummary;
 }): React.ReactElement => {
-  const imageUrl = podcast.images.sort((a, b) => b.height - a.height)?.[0]?.url;
   return (
     <StyledLink to={`/podcast/${podcast.id}`}>
       <PodcastCardContainer data-testid="podcast-card">
-        <PodcastImage src={imageUrl} alt={podcast.name} />
-        <PodcastTitle>{podcast.name}</PodcastTitle>
+        <PodcastImage src={podcast.imageUrl} alt={podcast.title} />
+        <PodcastTitle>{podcast.title}</PodcastTitle>
         <PodcastAuthor>Autor: {podcast.artist}</PodcastAuthor>
       </PodcastCardContainer>
     </StyledLink>
