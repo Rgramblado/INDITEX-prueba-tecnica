@@ -70,7 +70,8 @@ module.exports = (env) => {
         '@': path.resolve(__dirname, 'src'),
       },
       fallback: {
-        "process": require.resolve("process/browser"),
+        "process": false,
+        "buffer": false,
       },
     },
     plugins: [
@@ -83,6 +84,13 @@ module.exports = (env) => {
       }),
       new webpack.ProvidePlugin({
         process: 'process/browser',
+        Buffer: ['buffer', 'Buffer'],
+      }),
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify(process.env),
       }),
       ...(isProduction ? [new BundleAnalyzerPlugin({
         analyzerMode: 'static',
