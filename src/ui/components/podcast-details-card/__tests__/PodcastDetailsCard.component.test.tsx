@@ -2,13 +2,14 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import PodcastDetailsCardComponent from "../PodcastDetailsCard.component";
 import { MemoryRouter } from 'react-router-dom';
+import { IPodcast } from "@/domain/entities/Podcast";
 
 
-const mockPodcastDetails = {
+const mockPodcastDetails: IPodcast = {
   id: "1",
-  name: "Test Podcast",
-  artistName: "Test Artist",
-  description: "This is a test description",
+  title: "Test Podcast",
+  artist: "Test Artist",
+  summary: "This is a test description",
   imageUrl: "https://test-image.jpg",
   episodes: [],
 };
@@ -21,10 +22,10 @@ describe("Components - PodcastDetailsCard Component", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(mockPodcastDetails.name)).toBeInTheDocument();
-    expect(screen.getByText(`by: ${mockPodcastDetails.artistName}`)).toBeInTheDocument();
-    expect(screen.getByText(mockPodcastDetails.description)).toBeInTheDocument();
-    expect(screen.getByAltText(mockPodcastDetails.name)).toHaveAttribute('src', mockPodcastDetails.imageUrl);
+    expect(screen.getByText(mockPodcastDetails.title)).toBeInTheDocument();
+    expect(screen.getByText(`by: ${mockPodcastDetails.artist}`)).toBeInTheDocument();
+    expect(screen.getByText(mockPodcastDetails.summary)).toBeInTheDocument();
+    expect(screen.getByAltText(mockPodcastDetails.title)).toHaveAttribute('src', mockPodcastDetails.imageUrl);
   });
 
   it("should render nothing when podcastDetails is null", () => {

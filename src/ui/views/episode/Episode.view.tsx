@@ -35,22 +35,26 @@ const EpisodeView = (): React.ReactElement => {
 
   return (
     <AsyncLayout loading={!podcast || !episode}>
-      <EpisodeContainer data-testid="episode-container">
-        <PodcastDetailsCardComponent podcastDetails={podcast} />
-        <EpisodeDetailsCard data-testid="episode-details-card">
-          <EpisodeTitle data-testid="episode-title">
-            {episode?.title}
-          </EpisodeTitle>
-          <EpisodeDescription
-            data-testid="episode-description"
-            dangerouslySetInnerHTML={{ __html: episode?.description ?? "" }}
-          />
-          <EpisodeAudio data-testid="episode-audio" controls>
-            <source src={episode?.audioUrl} />
-            Your browser does not support the audio element.
-          </EpisodeAudio>
-        </EpisodeDetailsCard>
-      </EpisodeContainer>
+      {!!episode ? (
+        <EpisodeContainer data-testid="episode-container">
+          <PodcastDetailsCardComponent podcastDetails={podcast} />
+          <EpisodeDetailsCard data-testid="episode-details-card">
+            <EpisodeTitle data-testid="episode-title">
+              {episode.title}
+            </EpisodeTitle>
+            <EpisodeDescription
+              data-testid="episode-description"
+              dangerouslySetInnerHTML={{ __html: episode.description }}
+            />
+            <EpisodeAudio data-testid="episode-audio" controls>
+              <source src={episode?.audioUrl} />
+              Your browser does not support the audio element.
+            </EpisodeAudio>
+          </EpisodeDetailsCard>
+        </EpisodeContainer>
+      ) : (
+        <></>
+      )}
     </AsyncLayout>
   );
 };

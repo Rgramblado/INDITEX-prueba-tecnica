@@ -1,45 +1,27 @@
 // Vendors
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "@/utils/testing";
 
 // Views
 import EpisodeView from "../Episode.view";
+import { MemoryRouter } from "react-router-dom";
 
-const mockEpisode = {
-    id: "1",
-    title: "Episode 1",
-    description: "Description 1",
-    audioUrl: "https://example.com/audio.mp3",
-    date: "2021-01-01",
-    duration: "10:00",
-};
-
-const mockPodcast = {
-    id: "1",
-    title: "Podcast 1",
-    description: "Description 1",
-    imageUrl: "https://example.com/image.jpg",
-    audioUrl: "https://example.com/audio.mp3",
-    date: "2021-01-01",
-    duration: "10:00",
-};
-
-jest.mock("@/components/podcast-details-card/PodcastDetailsCard.component", () => ({
-    __esModule: true,
-    default: jest.fn(() => <div data-testid="podcast-details-card">Podcast Details Card</div>)
+jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useParams: jest.fn(() => ({
+        podcastId: "1",
+        episodeId: "1",
+    })),
 }));
 
-jest.mock("../hooks/Episode.hook", () => ({
-    __esModule: true,
-    default: jest.fn(() => ({
-        podcast: mockPodcast,
-        episode: mockEpisode,
-    }))
-}));
 
 describe("Views - Episode", () => {
     it("should render the episode view", () => {
-        render(<EpisodeView />);
+        render(
+            <MemoryRouter>
+                <EpisodeView />
+            </MemoryRouter>
+        );
         expect(screen.getByTestId("podcast-details-card")).toBeInTheDocument();
         expect(screen.getByTestId("episode-details-card")).toBeInTheDocument();
         expect(screen.getByTestId("episode-title")).toBeInTheDocument();
