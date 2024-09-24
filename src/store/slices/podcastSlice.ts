@@ -12,8 +12,8 @@ export const fetchPodcast = createAsyncThunk(
     const currentTime = Date.now();
 
     if (
-      state.podcast[id] &&
-      currentTime - state.podcast[id].timestamp < 24 * 60 * 60 * 1000
+      !!state.podcast[id]?.data &&
+      currentTime - state.podcast[id]?.timestamp < 24 * 60 * 60 * 1000
     ) {
       return state.podcast[id];
     }

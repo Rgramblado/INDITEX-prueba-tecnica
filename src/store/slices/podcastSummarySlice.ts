@@ -9,8 +9,8 @@ export const fetchPodcastSummary = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState() as RootState;
     const currentTime = Date.now();
-    
-    if (state.podcastSummary && currentTime - state.podcastSummary.timestamp < 24 * 60 * 60 * 1000) {
+
+    if (!!state?.podcastSummary?.data && currentTime - state.podcastSummary.timestamp < 24 * 60 * 60 * 1000) {
       return state.podcastSummary;
     }
     
