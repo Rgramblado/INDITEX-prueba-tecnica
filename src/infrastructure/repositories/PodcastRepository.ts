@@ -7,9 +7,9 @@ import { IPodcastSummary } from "@/domain/entities/PodcastSummary";
 const getPodcast = async (id: string, podcastSummary: IPodcastSummary[]): Promise<IPodcast | null> => {
   try {
     const response = await fetch(
-      `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`
+      `https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`)}`
     );
-    const data: ApiPodcast = await response.json();
+    const data: ApiPodcast = JSON.parse((await response.json()).contents);
     const summaryInfo = podcastSummary.find(summary => summary.id === id);
     
     if (!summaryInfo) {
@@ -18,7 +18,7 @@ const getPodcast = async (id: string, podcastSummary: IPodcastSummary[]): Promis
 
     return podcastMapper(data, summaryInfo)
   } catch (error) {
-    console.error("Error al obtener los podcasts:", error);
+    console.debug("Error al obtener los podcasts:", error);
     return null;
   }
 };

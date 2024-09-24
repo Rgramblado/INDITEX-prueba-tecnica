@@ -13,7 +13,6 @@ const podcastMapper = (apiPodcast: ApiPodcast, summaryInfo: IPodcastSummary): IP
             id: result.trackId.toString(),
             title: result.trackName,
             description: result.description,
-            date: result.releaseDate,
             duration: result.trackTimeMillis,
             audioUrl: result.episodeUrl,
             imageUrl: result.artworkUrl600,

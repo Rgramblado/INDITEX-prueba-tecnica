@@ -5,9 +5,9 @@ import podcastSummaryMapper from "../mappers/PodcastSummaryMapper";
 const getPodcastsSummary = async (): Promise<IPodcastSummary[]> => {
   try {
     const response = await fetch(
-      "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
+      "https://api.allorigins.win/get?url=https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
     );
-    const data: ApiPodcastSummary = await response.json();
+    const data: ApiPodcastSummary = JSON.parse((await response.json()).contents);
     return podcastSummaryMapper(data);
   } catch (error) {
     console.error("Error al obtener los podcasts:", error);

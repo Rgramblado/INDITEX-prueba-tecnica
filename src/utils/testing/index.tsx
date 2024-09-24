@@ -4,46 +4,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import rootReducer from '@/store/rootReducer';
 import { RootState } from '@/store/types';
-
+import { podcastSummaryStateMock } from '@/__mocks__/PodcastSummaryState';
+import { podcastStateMock } from '@/__mocks__/PodcastState';
 const mockState: RootState = {
-  podcastSummary: {
-    data: [{
-        id: '1',
-        title: 'Filete',
-        summary: 'Summary',
-        imageUrl: 'ImageUrl',
-        artist: 'Artist',
-    }, {
-        id: '2',
-        title: 'Jamon',
-        summary: 'Summary',
-        imageUrl: 'ImageUrl',
-        artist: 'Artist',
-    }],
-    timestamp: 0,
-  },
-  podcast: {
-    '1': {
-      timestamp: 0,
-      data: {
-        id: '1',
-        artist: 'Artist',
-        title: 'Title',
-        summary: 'Summary',
-        imageUrl: 'ImageUrl',
-        episodes: [
-            {
-                id: '1',
-                title: 'Title',
-                description: 'Description',
-                duration: 100,
-                audioUrl: 'AudioUrl',
-                releaseDate: '2024-01-01',
-            },
-        ],
-      },
-    },
-  },
+  podcastSummary: {...podcastSummaryStateMock},
+  podcast: {...podcastStateMock}
 };
 
 function render(
