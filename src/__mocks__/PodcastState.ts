@@ -1,6 +1,6 @@
 export const podcastStateMock = {
   "1": {
-    timestamp: 0,
+    timestamp: 1714857600000,
     data: {
       id: "1",
       title: "Filete",

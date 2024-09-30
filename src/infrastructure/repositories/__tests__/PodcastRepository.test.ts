@@ -1,5 +1,4 @@
 // Repository
-
 import { apiPodcastMock } from "@/__mocks__/ApiPodcast";
 import PodcastRepository from "../PodcastRepository";
 
@@ -24,6 +23,16 @@ describe("Infrastructure - Repositories - PodcastRepository", () => {
 
     const podcast = await getPodcast("1", podcastSummaryStateMock.data);
 
+    expect(podcast).toEqual(null);
+  });
+
+  it("should throw an error when the podcast summary is not found and be catched, returning null", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue({contents: JSON.stringify(apiPodcastMock)}),
+    } as unknown as Response);
+
+    const podcast = await getPodcast("1", []);
+    console.debug("getPodcast", podcast);
     expect(podcast).toEqual(null);
   });
 });

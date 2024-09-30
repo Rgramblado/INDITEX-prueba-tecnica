@@ -18,12 +18,12 @@ export const fetchPodcast = createAsyncThunk(
       return state.podcast[id];
     }
 
-    if (!state.podcastSummary || !state.podcastSummary.data) {
+    if (!state?.podcastSummary?.data || state?.podcastSummary?.data.length === 0) {
       await dispatch(fetchPodcastSummary());
     }
 
     const updatedState = getState() as RootState;
-    if (!updatedState.podcastSummary || !updatedState.podcastSummary.data) {
+    if (!updatedState?.podcastSummary?.data || updatedState.podcastSummary.data.length === 0) {
       throw new Error("Failed to fetch podcast summary");
     }
 

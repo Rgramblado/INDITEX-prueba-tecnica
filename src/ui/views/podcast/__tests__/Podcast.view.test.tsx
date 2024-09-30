@@ -7,18 +7,18 @@ import PodcastView from "../Podcast.view";
 import { MemoryRouter } from "react-router-dom";
 
 jest.mock("react-router-dom", () => ({
-    ...jest.requireActual("react-router-dom"),
-    useParams: jest.fn(() => ({
-        podcastId: "1",
-    })),
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn(() => ({
+    podcastId: "1",
+  })),
 }));
 
 describe("Views - Podcast", () => {
   it("should render", () => {
     render(
-        <MemoryRouter>
-            <PodcastView />
-        </MemoryRouter>
+      <MemoryRouter>
+        <PodcastView />
+      </MemoryRouter>
     );
     expect(screen.getByTestId("podcast-container")).toBeInTheDocument();
     expect(screen.getAllByTestId("podcast-card")).toHaveLength(2);

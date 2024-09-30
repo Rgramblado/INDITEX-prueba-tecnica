@@ -15,5 +15,5 @@ export const podcastSummaryStateMock = {
       artist: "Artist",
     },
   ],
-  timestamp: 0,
+  timestamp: 1714857600000,
 };
